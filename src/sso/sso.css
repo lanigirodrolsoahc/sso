@@ -1,0 +1,1314 @@
+.logger {
+    display: flex;
+}
+
+.logger form {
+    margin: auto;
+    width: 50%;
+}
+
+.logger form input,
+.logger a {
+    box-sizing: border-box;
+    width: 100%;
+    padding: .5em;
+    margin: .5em;
+}
+
+input[type="login"],
+input[type="password"],
+input[type="text"] {
+    color: var(--corporate-color);
+    font-family: var(--font);
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+}
+
+::placeholder {
+    color: var(--corporate-color);
+}
+
+.logger form input[type="submit"],
+.logger form input[type="button"],
+.avatarForm input[type="submit"],
+.logger a {
+    width: auto;
+    color: var(--corporate-color);
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: var(--font);
+}
+
+.logger a {
+    text-decoration: none;
+    font-size: .8em;
+}
+
+.logger form input[type="submit"]:hover,
+.logger form input[type="button"]:hover,
+.avatarForm form input[type="submit"]:hover,
+.logger a:hover {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.inlineButtons {
+    text-align: right;
+}
+
+.inlineButtons > div {
+    display: inline-block;
+}
+
+.whited {
+    text-shadow: 1px 1px 1px white;
+}
+
+.customAlerts {
+    border: 2px solid var(--corporate-color);
+    border-radius: .3em;
+    user-select: none
+}
+
+.customAlerts > div {
+    font-family: var(--font);
+    color: var(--corporate-color);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+    border-radius: .3em;
+    padding: .2em;
+}
+
+.customAlerts > div > div:nth-child(1) {
+    padding: .2em;
+    font-size: 2em;
+}
+
+.customAlerts > div > div:nth-child(2) {
+    padding: .2em;
+    margin-left: .5em;
+}
+
+.customAlerts > div:hover {
+    background-color: var(--corporate-light);
+    color: white;
+    text-shadow: 1px 1px 2px var(--corporate-color);
+}
+
+.menu {
+    position: fixed;
+    top: 20%;
+    left: 2.6%;
+    width: 12%;
+    height: 70%;
+    padding: .6em;
+    user-select: none;
+}
+
+.menuItem {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: .6em;
+}
+
+.menuItem:hover .menuPicto {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.menuItem:hover .menuTxt {
+    width: 70%;
+}
+
+.menuPicto {
+    width: 1.9em;
+    font-size: 1.9em;
+    text-align: center;
+    transition: all 1s ease-in-out;
+    background-color: #FFFFFF70;
+    border: 1px solid #94357130;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuPicto:hover {
+    border: 1px solid var(--corporate-color);
+    background-color: #FFFFFF;
+}
+
+.menuTxt {
+    width: 0;
+    transition: all 1s ease-in-out;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: .3em;
+}
+
+.undecoratedLink {
+    text-decoration: none;
+}
+
+@media (orientation: portrait)
+{
+    .menuTxt {
+        display: none;
+    }
+}
+
+@keyframes bounce {
+    0%   { transform: scale(1,1)    translateY(0); }
+    10%  { transform: scale(1.1,.90) translateY(0); }
+    30%  { transform: scale(.90,1.1) translateY(-1%); }
+    50%  { transform: scale(1,1)    translateY(0); }
+    57%  { transform: scale(1,1)    translateY(-.10%); }
+    64%  { transform: scale(1,1)    translateY(0); }
+    100% { transform: scale(1,1)    translateY(0); }
+}
+
+@keyframes rotates {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.formInformation {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: start;
+    padding: .5em;
+}
+
+.formInformation > div:nth-child(1) {
+    width: 2em;
+    font-size: 2em;
+}
+
+.formInformation > div:nth-child(2) {
+    align-self: center;
+    font-style: oblique;
+}
+
+.userItem {
+    width: 20%;
+    user-select: none;
+    transition: all 1s ease-in-out;
+    border-radius: .3em;
+    margin: 1%;
+    word-break: break-word;
+    border: 1px solid transparent;
+}
+
+.userItem.single {
+    width: 100% !important;
+}
+
+.userItem > div,
+.iconedRow {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.userItem > div > div {
+    padding: .3em;
+}
+
+.userIcon {
+    width: 2em;
+    min-width: 2em;
+    max-width: 2em;
+    text-align: center;
+    font-size: 1.2em;
+    align-self: start;
+}
+
+.userHead {
+    align-self: flex-start;
+}
+
+.userHead .userIcon {
+    font-size: 2em;
+}
+
+.userItem > div:not(.userHead) {
+    margin-left: 2em;
+}
+
+.userHead > div:not(.userIcon) {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px white;
+}
+
+.editable {
+    float: right;
+    width: 1.3em;
+    font-size: 1.8em;
+    line-height: 1.3em;
+    text-align: center;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.editable:hover {
+    rotate: 360deg;
+}
+
+.editing:hover .editable {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.cumulatedMarges {
+    margin-left: .9em;
+    padding: .2em;
+}
+
+.applicationed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: start;
+    padding: .3em;
+}
+
+.applicationed > div {
+    margin: .4em;
+    padding: .2em;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+    transition: all 1s ease-in-out;
+}
+
+.applicationed > div:hover {
+    background: linear-gradient(var(--corporate-light), var(--corporate-light)), linear-gradient(white, white);
+    color: white;
+    box-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 1px black;
+}
+
+.applicationed > div > div:nth-child(1) {
+    font-size: .5em;
+    margin-right: .5em;
+}
+
+.applicationed > div > div:nth-child(2) {
+    font-size: .8em;
+}
+
+.hidableParent {
+    cursor: pointer;
+}
+
+.hidableChild {
+    transition: all 1s ease-in-out;
+}
+
+.hidableChild.shamed {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.hidableChild.shamed div {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.flexRadio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+}
+
+.flexRadio > div {
+    font-size: 2.8em;
+    margin: .5em;
+    padding: .2em;
+    user-select: none;
+}
+
+.flexRadio label {
+    cursor: pointer;
+    opacity: 0.2;
+    border: 1px solid var(--corporate-color);
+    border-radius: 50%;
+    padding: .2em;
+    background-color: white;
+}
+
+.userEditionBlock label {
+    cursor: pointer;
+    opacity: 0.2;
+    margin-right: .3em;
+    margin-left: .3em;
+    border: none;
+    font-size: 1.8em;
+}
+
+.flexRadio label:hover,
+.userEditionBlock label:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.flexRadio input,
+.userEditionBlock div:has( > label ) input {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    pointer-events: none;
+    transition: all 1s ease-in-out;
+}
+
+.flexRadio input[type="radio"]:focus+label,
+.userEditionBlock div:has( > label ) input[type="radio"]:focus+label {
+    opacity: 1;
+}
+
+.flexRadio input[type="radio"]:checked+label,
+.userEditionBlock div:has( > label ) input[type="radio"]:checked+label {
+    opacity: 1;
+}
+
+.avatarForm .formRightSubmit {
+    text-align: right;
+    width: 75%;
+}
+
+.pwdEyed input {
+    padding-right: 2.2em ! important;
+}
+
+.pwdEyed > div {
+    float: right;
+    margin-top: -2.3em;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    user-select: none;
+    transition: all 1s ease-in-out;
+    opacity: 0;
+}
+
+.pwdEyed:hover > div {
+    opacity: 1;
+}
+
+.pwdEyed > div:hover {
+    rotate: 360deg;
+}
+
+.applicationBlock {
+    padding: .3em .3em 3.2em .3em;
+}
+
+.applicationBlock > div:nth-child(1) {
+    font-size: 1.2em;
+    position: sticky;
+    top: 0;
+    padding: .2em .6em;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+    background-color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    transition: all 1s ease-in-out;
+    z-index: 2;
+}
+
+.applicationBlock:hover > div:nth-child(1) {
+    background-color: var(--corporate-ultra);
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px var(--corporate-color);
+    box-shadow: 1px 1px 1px var(--corporate-color);
+}
+
+.applicationDescribed {
+    font-style: italic;
+    padding: .5em;
+    box-sizing: border-box;
+    margin: 1%;
+    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 5em;
+    color: var(--corporate-color);
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+}
+
+div:has(.applicationDescribed) input[type="submit"],
+div:has(.applicationKeyed) input[type="submit"],
+div:has(.groupInnerSaver) input[type="submit"] {
+    border: none;
+    background: none;
+    font-size: 1.2em;
+    text-align: center;
+    align-self: end;
+    padding: .8em;
+    transition: all 1s ease-in-out;
+}
+
+div:has(.groupInnerSaver) input[type="button"] {
+    border: none;
+    background: none;
+    font-size: 1.2em;
+    transition: all 1s ease-in-out;
+    padding: none ! important;
+    width: 100% ! important;
+}
+
+div:has(.applicationDescribed) input[type="submit"]:hover,
+div:has(.applicationKeyed) input[type="submit"]:hover,
+div:has(.groupInnerSaver) input[type="submit"]:hover,
+div:has(.groupInnerSaver) input[type="button"]:hover {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+    cursor: pointer;
+}
+
+.applicationIconed {
+    width: 3em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.applicationKeyed {
+    font-style: italic;
+    padding: .5em;
+    box-sizing: border-box;
+    margin: 1%;
+    width: 90%;
+}
+
+.applicationHolder {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: start;
+}
+
+input:not([type="submit"]):read-write:focus,
+select:focus,
+textarea:focus {
+    background-color: rgb(242, 144, 16);
+    color: white;
+    outline: none;
+    border-style: dashed;
+    box-shadow: 0 0 0 0.25rem rgb(255, 255, 255);
+}
+
+input[type="text"]:read-only {
+    outline: none;
+}
+
+.applicationRights > div:nth-child(1) {
+    padding: .6em;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.applicationRights > div:nth-child(1) > div:nth-child(1) {
+    width: 2em;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.rightsEdit {
+    padding: 1.3em;
+    user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 95%;
+    font-size: 1.1em;
+}
+
+.rightsEdit form {
+    width: 100%;
+    padding: .4em;
+}
+
+.rightsEdit fieldset {
+    display: inline-block;
+    text-align: center;
+    border-radius: .3em;
+    border: 1px solid white;
+    box-shadow: 1px 1px 1px var(--corporate-light);
+    text-shadow: 1px 1px 1px var(--corporate-color);
+    margin: .2em;
+    transition: all 1s ease-in-out;
+    color: white;
+}
+
+.rightsEdit fieldset:hover {
+    border: 1px solid var(--corporate-light);
+    background-color: rgba(255, 255, 255, 0.651);
+}
+
+.rightsEdit fieldset legend {
+    transition: all 1s ease-in-out;
+}
+
+.rightsEdit fieldset:hover legend {
+    color: var(--corporate-color);
+    text-shadow: 1px 1px 1px white;
+}
+
+.rightsEdit label {
+    opacity: 0.2;
+    margin: 0 .2em
+}
+
+.rightsEdit label:hover {
+    opacity: 0.6;
+}
+
+.rightsEdit label:hover:not(.info) {
+    cursor: pointer;
+}
+
+.rightsEdit input:not([type="submit"]) {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    pointer-events: none;
+    transition: all 1s ease-in-out;
+}
+
+.rightsEdit input[type="radio"]:focus+label,
+.rightsEdit input[type="checkbox"]:focus+label {
+    opacity: 0.8;
+}
+
+.rightsEdit input[type="radio"]:checked+label,
+.rightsEdit input[type="checkbox"]:checked+label {
+    opacity: 1;
+}
+
+.rightCreator,
+.rightErazor {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.rightsEdit > div {
+    width: 100%;
+}
+
+.rightsEdit div input[type="submit"] {
+    float: right;
+}
+
+.rightsEdit fieldset:has(input[type="checkbox"]:checked) {
+    border-color: rgb(218, 67, 67);
+    color: rgb(218, 67, 67);
+    text-shadow: 1px 1px 1px white;
+}
+
+.rightsEditor input[type="text"],
+.groupEditor input[type="text"],
+.rightsEditor textarea,
+.groupEditor textarea,
+.usersModal input[type="text"] {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 98%;
+    min-width: 98%;
+    max-width: 98%;
+    padding: .2em;
+    margin: .3em;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+}
+
+.rightsEditor textarea,
+.groupEditor textarea {
+    min-height: 5em;
+    max-height: 20em;
+}
+
+.rightsEditor input[type="text"]::placeholder,
+.rightsEditor textarea::placeholder,
+.groupEditor input[type="text"]::placeholder,
+.groupEditor textarea::placeholder,
+.usersModal input[type="text"] {
+    font-style: oblique;
+}
+
+.rightsEditor input[type="submit"],
+.rightsEditor input[type="button"],
+.groupsModal input[type="submit"],
+.groupsModal input[type="button"],
+.sortModal input[type="button"],
+.searchModalBlock input[type="button"],
+.userEditionSaver input[type="submit"],
+.usersModal input[type="button"],
+.usersModal input[type="submit"] {
+    border: none ! important;
+    background-color: transparent ! important;
+    cursor: pointer;
+    font-size: 1.3em;
+    margin: .2em;
+    transition: all 1s ease-in-out;
+}
+
+.rightsEditor input[type="submit"]:hover,
+.rightsEditor input[type="button"]:hover,
+.groupsModal input[type="submit"]:hover,
+.groupsModal input[type="button"]:hover,
+.sortModal input[type="button"]:hover,
+.searchModalBlock input[type="button"]:hover,
+.userEditionSaver input[type="submit"]:hover,
+.usersModal input[type="button"]:hover,
+.usersModal input[type="submit"]:hover {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.rightsEditor > div:last-of-type,
+.groupsModal form > div:last-of-type,
+.sortModal form > div:last-of-type,
+.searchModalBlock form > div:last-of-type,
+.usersModal > div:last-of-type,
+.usersModal > form > div > div {
+    text-align: right;
+}
+
+.rightsModal,
+.groupsModal,
+.sortModal,
+.searchModalBlock,
+.usersModal {
+    width: 30%;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+    background-color: rgba(255, 255, 255, 0.527);
+}
+
+.rightsModal > div:nth-child(1),
+.groupsModal > div:nth-child(1),
+.sortModal form > div:nth-child(1),
+.searchModalBlock form > div:nth-child(1),
+.usersModal > div:nth-child(1) {
+    user-select: none;
+    text-align: center;
+    color: var(--corporate-color);
+    padding: 1em;
+    text-shadow: 1px 1px 1px white;
+}
+
+.noPointer {
+    cursor: auto ! important;
+}
+
+label.info.infoEdit:not(.noPointer) {
+    cursor: help;
+}
+
+.adminAddingButton {
+    position: fixed;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    right: .5em;
+    bottom: .5em;
+    font-size: 3em;
+    z-index: 3;
+    user-select: none;
+}
+
+.adminAddingButton > div {
+    width: 80%;
+    height: 80%;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+}
+
+.adminAddingButton > div:hover {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.mobilityManager {
+    position: fixed;
+    bottom: .4em;
+    left: 0;
+    z-index: 4;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+    pointer-events: none;
+}
+
+.mobilityManager > div {
+    pointer-events: all;
+}
+
+.pageHelper {
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+    opacity: .2;
+    font-size: 2.6em;
+}
+
+.pageHelper:hover {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.pageHelper:hover {
+    opacity: 1;
+}
+
+.groupEditionForm .groupHead {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.groupEditionForm {
+    padding: 1em;
+    margin-bottom: 4em;
+}
+
+.groupEditionForm .groupHead > div {
+    width: 75%;
+}
+
+.groupEditionForm .groupHead > div:nth-child(1) {
+    font-size: 1.7em;
+    width: 2em;
+    user-select: none;
+}
+
+.groupEditionForm input
+{
+    padding: .3em;
+    box-sizing: border-box;
+    width: 45%;
+    transition: all 1s ease-in-out;
+}
+
+.groupEditionForm:hover input[type="text"] {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.groupEditionForm input:hover {
+    animation: none;
+}
+
+.groupEditionForm textarea {
+    padding: .3em;
+    box-sizing: border-box;
+    width: 75%;
+    min-width: 75%;
+    max-width: 75%;
+    min-height: 5em;
+    max-height: 15em;
+    margin: 1.4em;
+    color: var(--corporate-color);
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+}
+
+.groupsListsSplitter {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: start;
+}
+
+.groupsListsSplitter > div {
+    width: 33%;
+    padding: .3em;
+    user-select: none;
+}
+
+.groupsListsSplitter > div > div:nth-child(1) {
+    padding: .8em;
+    text-align: center;
+    text-shadow: 1px 1px white;
+}
+
+.groupsAppName,
+.groupChildren {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .2em;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+    background-color: white;
+    transition: all 1s ease-in-out;
+    margin-bottom: .2em;
+    box-shadow: 1px 1px 1px var(--corporate-light);
+}
+
+.groupsAppName {
+    position: sticky;
+    top: 2.5em;
+}
+
+.groupsAppName:hover {
+    background-color: var(--corporate-light);
+    color: white;
+    text-shadow: var(--corporate-ultra);
+    cursor: pointer;
+}
+
+.groupsAppName > div:nth-child(1),
+.groupChildren > div:nth-child(1) {
+    width: 2em;
+}
+
+.groupsAppRights {
+    font-size: .8em;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.groupsAppUnshy {
+    opacity: 1;
+    height: auto;
+}
+
+.groupChildren input[type="checkbox"] {
+    display: none;
+}
+
+.groupChildren input[type="checkbox"] + label {
+    opacity: 0.4;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+
+.groupChildren input[type="checkbox"]:checked + label {
+    opacity: 1;
+}
+
+.groupChildren input[type="checkbox"]:not(:checked) + label::after {
+    content: ' ⛔';
+}
+
+.groupChildren input[type="checkbox"]:checked + label::after {
+    content: ' ✅';
+}
+
+.groupChildren {
+    transition: all 1s ease-in-out;
+    opacity: 0.4;
+}
+
+.groupChildren:has( input[type="checkbox"]:checked ) {
+    opacity: 1;
+}
+
+.groupChildren:hover {
+    opacity: 0.7;
+}
+
+.groupChildren:hover label {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.groupUsersList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+}
+
+.groupUserBlock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .3em;
+    width: 29%;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+    margin: .1em;
+    box-shadow: 1px 1px var(--corporate-light);
+    background-color: white;
+    transition: all 1s ease-in-out;
+}
+
+.groupUserBlock > div.groupUserTimeLimit {
+    opacity: 0.1;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+
+.groupUserBlock:hover > div.groupUserTimeLimit
+{
+    opacity: 1;
+}
+
+.groupUserTimeLimit:hover {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.groupUserButton {
+    width: 2em;
+    text-align: center;
+    font-size: 1.3em;
+    max-width: 30%;
+}
+
+.groupUserBlock > div.groupUserNamed {
+    font-size: .8em;
+    width: 100%;
+    text-align: center;
+    margin-top: .3em;
+    word-break: break-word;
+}
+
+.groupUserBlock:not( :has( input[type="checkbox"]:checked ) ) {
+    opacity: 0.4;
+}
+
+.groupUserBlock input[type="checkbox"] {
+    display: none;
+}
+
+.groupUserBlock input[type="checkbox"] + label::after {
+    cursor: pointer;
+    font-size: .8em;
+    content: ' ⛔';
+}
+
+.groupUserBlock input[type="checkbox"]:checked + label::after {
+    opacity: 1;
+    content: ' ✅';
+}
+
+div:has( > .groupInnerSaver) {
+    position: sticky;
+    bottom: 7%;
+    text-align: right;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.groupInnerSaver,
+.innerDelete {
+    width: 2.5em ! important;
+    font-size: 1.8em ! important;
+}
+
+.dateBlock {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+}
+
+.groupsModal input[type="date"] {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+    padding: .2em;
+    margin: .3em;
+    border: 1px solid var(--corporate-color);
+    border-radius: .3em;
+    color: var(--corporate-color);
+}
+
+.groupsModal label {
+    display: block;
+    width: 25%;
+    min-width: 25%;
+    max-width: 25%;
+    text-align: right;
+    margin-right: 1em;
+    color: var(--corporate-color);
+    text-shadow: 1px 1px var(--corporate-ultra);
+    transition: all 1s ease-in-out;
+}
+
+.dateBlock:hover label {
+    text-shadow: 1px 1px white;
+}
+
+.dateBlock > div {
+    width: 20%;
+    margin-left: 1em;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+}
+
+.dateBlock > div:hover {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.groupUserBlock:not(:has(input[type="checkbox"]:checked)) .groupUserTimeLimit {
+    opacity: 0 ! important;
+    pointer-events: none;
+}
+
+.sortModal label {
+    color: var(--corporate-color);
+    user-select: none;
+}
+
+.seracherInputer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.searchModalBlock input[type="text"] {
+    width: 70%;
+}
+
+.noData {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .3em;
+}
+
+.noData > div {
+    padding: .3em;
+}
+
+.noData > div:nth-child(1) {
+    font-size: 3em;
+    animation: rotates 2s linear infinite;
+    text-align: center;
+}
+
+.noData > div:nth-child(2) {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+    font-weight: bold;
+}
+
+.anyUserList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: start;
+}
+
+.anyUserList .userItem {
+    padding: 1em;
+    font-size: .8em;
+}
+
+.anyUserList .userItem:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: var(--corporate-color);
+}
+
+.anyUserList .userItem:hover .userHead {
+    position: sticky;
+    top: 0;
+}
+
+.iconedRow:has(.userIcon.bouncing) > div:nth-child(2) {
+    transition: all 1s ease-in-out;
+    height: 2em;
+    overflow: hidden;
+}
+
+.iconedRow:has(.userIcon.bouncing):has(.show) > div:nth-child(2) {
+    height: auto;
+}
+
+.iconedRow:has(.userIcon.bouncing):not(:has(.show)) > div:nth-child(2) > div:nth-child(1)::before {
+    content: '...';
+    line-height: 2em;
+}
+
+.userIcon.bouncing {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+    cursor: pointer;
+}
+
+.yesNoFainting {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.yesNoFainting > div {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.yesNoFainting > div > div {
+    color: var(--corporate-color);
+    opacity: 0;
+    transition: all 1s ease-in-out;
+    text-shadow: 1px 1px white;
+}
+
+.yesNoFainting > div:hover > div {
+    opacity: 1;
+}
+
+.groupDeletor {
+    width: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.userEditionHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.userEditionBlock {
+    margin: .5em 3em .5em .5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    width: 28%;
+}
+
+.userEditionBlock > div {
+    margin: .4em;
+}
+
+.userEditionInfo {
+    width: 25%;
+}
+
+.userEditionInfo > div {
+    transition: all 1s ease-in-out;
+}
+
+.userEditionInfo > div:nth-child(1) {
+    text-align: center;
+    font-size: 1.4em;
+}
+
+.userEditionInfo > div:nth-child(2) {
+    text-shadow: 1px 1px 1px white;
+    text-align: center;
+    word-break: break-word;
+}
+
+.userEditionBlock > div:nth-child(2) {
+    width: 75%;
+}
+
+.userEditionBlock:hover .userEditionInfo > div:nth-child(1) {
+    animation: linear infinite;
+    animation-name: bounce;
+    animation-duration: 0.5s;
+}
+
+.userEditionBlock:hover .userEditionInfo > div:nth-child(2) {
+    color: white;
+    text-shadow: 2px 2px 2px var(--corporate-color);
+}
+
+.userEditionInput {
+    padding: .5em 1em;
+    border-radius: .3em;
+    border: 1px solid var(--corporate-color);
+    color: var(--corporate-color);
+    width: 100%;
+    box-sizing: border-box;
+    height: 3em;
+}
+
+.userEditionSaver {
+    text-align: right;
+}
+
+.userEditionBlock input:read-only {
+    background-color: var(--corporate-ultra);
+}
+
+.pwdDisplayer {
+    text-align: center;
+    font-family: 'Lucida Console', monospace;
+    color: var(--corporate-color);
+    text-shadow: 1px 1px 1px var(--corporate-ultra);
+    font-weight: bold;
+    font-size: 1.4em;
+    user-select: all;
+    padding: .4em;
+    border-radius: .3em;
+    border: 1px solid var(--corporate-color);
+    background-color: white;
+    margin: 1em 3em;
+    word-break: break-all;
+}

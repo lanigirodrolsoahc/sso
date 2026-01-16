@@ -1,0 +1,15 @@
+{
+    "name": "project/sso",
+    "description": "A PHP sso project",
+    "type": "project",
+    "require": {
+        "jacwright/restserver": "dev-master",
+        "guitarneck/html": "dev-master",
+        "league/commonmark": "^2.4",
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "discard-changes": true
+    }
+}

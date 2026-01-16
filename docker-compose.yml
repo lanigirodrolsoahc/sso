@@ -1,0 +1,44 @@
+version: "3.3"
+
+services:
+  php:
+    build: .
+    volumes:
+      - ./src/sso:/var/www/html/sso
+    container_name: sso_php
+    ports:
+      - "8084:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  db:
+    image: mariadb:10.11
+    container_name: sso_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    command: >
+      --sql-mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: sso_pma
+    ports:
+      - "8085:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD}
+
+volumes:
+  db_data:

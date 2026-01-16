@@ -1,0 +1,130 @@
+:root {
+    --corporate-color: #943571;
+    --corporate-light: rgba(148, 53, 113, 0.5);
+    --corporate-ultra: rgba(148, 53, 113, 0.2);
+    --row-height: 2.4em;
+    --font: "Bradley Hand", cursive;
+}
+
+html {
+    width: 100%;
+    color: var(--corporate-color);
+    font-family: var(--font);
+    background-color: var(--corporate-ultra);
+    scrollbar-width: thin;
+    scrollbar-color: var(--corporate-color) var(--corporate-ultra);
+}
+
+body {
+    margin-left: 15%;
+    width: 80%;
+    margin-top: 5%;
+    min-height: 90%;
+}
+
+::selection {
+    color: white;
+    background: var(--corporate-color);
+}
+
+.mainContent {
+    margin-bottom: 5%;
+}
+
+.logoContainer {
+    position: fixed;
+    top: 1em;
+    left: .2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    pointer-events: none;
+    padding: .2em;
+}
+
+.logoContainer img {
+    width: 70%;
+    height: auto;
+    opacity: 0.4;
+    transition: all 1s ease-in-out;
+    pointer-events: all;
+}
+
+.logoContainer:hover img {
+    rotate: 2160deg;
+    opacity: 1;
+    cursor: none;
+}
+
+.hidden {
+    transition: all 1s ease-in-out;
+    pointer-events: none ! important;
+    width: 0 ! important;
+    height: 0 ! important;
+    opacity: 0 ! important;
+}
+
+.visible {
+    transition: all 1s ease-in-out;
+    pointer-events: all ! important;
+    height: auto ! important;
+    opacity: 1 ! important;
+}
+
+#result {
+    user-select: none;
+    margin-top: 1em;
+    padding: 1em;
+    box-sizing: border-box;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.bordered {
+    border: 2px solid var(--corporate-color);
+    border-radius: 0.4em;
+}
+
+.canonInput {
+    height: var(--row-height);
+    box-sizing: border-box;
+    padding: 0.7em;
+    color: var(--corporate-color);
+    outline: none;
+    font-family: var(--font);
+}
+
+input[type="text"].bordered:focus {
+    border: 2px solid var(--corporate-color);
+    color: var(--corporate-color);
+}
+
+#orderFinder {
+    height: var(--row-height);
+    margin-left: 1em;
+}
+
+.corporateButtons {
+    cursor: pointer;
+    background-color: var(--corporate-ultra);
+    transition: all 1s ease-in-out;
+}
+
+.corporateButtons:hover {
+    background-color: var(--corporate-light);
+}
+
+@media screen and (orientation:landscape) {
+    .w50 {
+        transition: all 1s ease-in-out;
+        width: 50% ! important;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    .w50 {
+        transition: all 1s ease-in-out;
+        width: 75% ! important;
+    }
+}
