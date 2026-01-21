@@ -50,7 +50,6 @@ sudo apt install -y make
 ```shell
 make
 make rebuild
-make composer
 ```
 
 ## open your project
