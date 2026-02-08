@@ -56,12 +56,13 @@ class Api extends SsoServer
                 ->fill(
                     \Std::__new()
                         ->{ $user->f_login }( $this->vars->{ self::KEY_USER_LOGIN } )
-                        ->{ $user->f_password }( Password::hash( $this->vars->{ self::KEY_USER_PWD } ) )
                 )
                 ->read()
             || ! $user->isActive()
         )
             $this->error(self::ERR_UKNOWN_USER);
+        elseif ( ! Password::verify( $this->vars->{ self::KEY_USER_PWD }, $user->getVirtual()->{ $user->f_password } ) )
+            $this->error(Form::ERR_INVALID_PWD);
         elseif (
             $user->mustRenew()
         )

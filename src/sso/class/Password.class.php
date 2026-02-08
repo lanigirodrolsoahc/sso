@@ -12,12 +12,12 @@ class Password
             PWD_DESCRIBE        = 'Minimum %1$s caractères, maximum %2$s, dont 1 minuscule, 1 majuscule, 1 caractère spécial : &@+\?_#=',
             PWD_MAX_LENGTH      = 100,
             PWD_MIN_LENGTH      = 10,
-            REG_PWD             = '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[&@+\?_#=])/',
-            SALT                = '4n3P198A';
+            REG_PWD             = '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[&@+\?_#=])/';
 
     private
     const   CAPITALS    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             DIGITS      = '0123456789',
+            HASH_OLD    = 'sha256',
             LETTERS     = 'abcdefghijklmnopqrstuvwxyz',
             SPECIALS    = '!@#$%^&*()_+-={}[]|:;"<>,.?/';
 
@@ -51,10 +51,16 @@ class Password
         try {
             if ( ! self::complexity($pwd) ) throw new \Exception;
 
-            if ( ( $user = User::Instance() )
-                ->init()
-                ->fill( \Std::__new()->{ $user->f_password }( self::hash($pwd) ) )
-                ->read() ) throw new \Exception;
+            if (
+                ( $used = UsedPasswords::Instance() )
+                    ->fill(
+                        \Std::__new()
+                            ->{ $used->f_userId }( ( ( $user = User::Instance() )->getVirtual() )->{ $user->f_id } )
+                            ->{ $used->f_content }( self::hashUsed($pwd) )
+                    )
+                    ->read()
+            )
+                throw new \Exception;
         }
         catch ( \Throwable $t ) {
             $pwd = false;
@@ -73,6 +79,33 @@ class Password
     public static
     function hash ( string $pwd ) : string
     {
-        return crypt($pwd, self::SALT);
+        return password_hash($pwd, PASSWORD_DEFAULT);
+    }
+
+    /**
+     * hashes a password for used ones storage only
+     *
+     * @param   string  $pwd
+     *
+     * @return  string
+     */
+    public static
+    function hashUsed ( string $pwd ) : string
+    {
+        return hash(self::HASH_OLD, $pwd);
+    }
+
+    /**
+     * determines if current password can be accepted
+     *
+     * @param   string  $pwd
+     * @param   string  $hashed
+     *
+     * @return  bool
+     */
+    public static
+    function verify ( string $pwd, string $hashed ) : bool
+    {
+        return password_verify($pwd, $hashed);
     }
 }

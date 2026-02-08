@@ -12,6 +12,7 @@ class Form extends SsoServer
             ERR_BAD_REQUEST         = 'Erreur de requête !',
             ERR_OLD_PWD_MEMORY      = 'Erreur de mémorisation de l\'ancien mot de passe !',
             ERR_INACTIVE_USER       = 'Cet utilisateur ne semble pas actif',
+            ERR_INVALID_PWD         = 'Mot de passe invalide',
             ERR_INVALID_TOKEN       = 'Token invalide',
             ERR_PREVIOUSLY          = 'Ce mot de passe a déjà été utilisé !',
             ERR_PWD_COMPLEXITY      = 'Le mot de passe diverge du format canonique.',
@@ -42,7 +43,7 @@ class Form extends SsoServer
                 ->fill(
                     $fill = \Std::__new()
                         ->{ $used->f_userId }( ( $vo = ( $user = User::Instance() )->getVirtual() )->{ $user->f_id } )
-                        ->{ $used->f_content }( $hashed = Password::hash($this->vars->{ User::PWD_NEW }) )
+                        ->{ $used->f_content }( Password::hashUsed( $this->vars->{ User::PWD_NEW } ) )
                 )
                 ->read()
         )
@@ -59,7 +60,7 @@ class Form extends SsoServer
             ! $user
                 ->fill(
                     $vo
-                        ->{ $user->f_password }($hashed)
+                        ->{ $user->f_password }( Password::hash( $this->vars->{ User::PWD_NEW } ) )
                         ->{ $user->f_lastPwdChange }($now)
                 )
                 ->save()
@@ -87,22 +88,21 @@ class Form extends SsoServer
                 ->fill(
                     \Std::__new()
                         ->{ $user->f_login }( $this->vars->{ User::LOGIN } )
-                        ->{ $user->f_password }( Password::hash($this->vars->{ User::PWD }) )
                 )
                 ->read()
         )
             $this->error(self::ERR_UKNOWN_USER);
+        elseif ( ! Password::verify( $this->vars->{ User::PWD }, $user->getVirtual()->{ $user->f_password } ) )
+            $this->error(self::ERR_INVALID_PWD);
         elseif ( ! $user->isActive() )
             $this->error(self::ERR_INACTIVE_USER);
         elseif ( $user->mustRenew() )
         {
             $renew = ( $token = Token::Instance() )->refresh($userId = $user->getVirtual()->{ $user->f_id }, Token::TYPE_PWD_RENEWAL) ?? true;
 
-            $this->server->setStatus(self::CODE_FORBIDDEN);
-
             $this
                 ->render( \Std::__new()
-                    ->{ self::MSG }($url = sprintf(
+                    ->{ self::MSG }( sprintf(
                         '%1$s%2$s?%3$s',
                         $this->urlRoot,
                         Router::RENEW,
@@ -111,7 +111,8 @@ class Form extends SsoServer
                                 ->{ Token::PARAM_NAME }( $token->getGenerated() )
                                 ->{ $user->f_id }($userId)
                         )
-                    )));
+                    )))
+                ->server->setStatus(self::CODE_FORBIDDEN);
         }
         elseif (
             ! $user
@@ -126,7 +127,6 @@ class Form extends SsoServer
         else
         {
             Session::store( User::SESS_MARK, $vo->{ $user->f_id } );
-
             $code = self::CODE_OK;
         }
 
@@ -280,11 +280,12 @@ class Form extends SsoServer
                 ->fill(
                     \Std::__new()
                         ->{ $user->f_id }( Session::retrieve(User::SESS_MARK) )
-                        ->{ $user->f_password }( Password::hash($this->vars->{ User::PWD }) )
                 )
                 ->read()
         )
             $this->error(self::ERR_BAD_PWD_ID);
+        elseif ( ! Password::verify( $this->vars->{ User::PWD }, $user->getVirtual()->{ $user->f_password } ) )
+            $this->error(Form::ERR_INVALID_PWD);
         else
             $code = $this->checkAndSavePassword();
 
@@ -333,8 +334,8 @@ class Form extends SsoServer
     protected
     function out ( $code ) : void
     {
-        $this->server->setStatus( $code !== false ? $code : self::CODE_BAD_REQUEST );
-
-        $this->render( \Std::__new()->{ self::MSG }( $code ? self::MSG_OK : $this->failures() ) );
+        $this
+            ->render( \Std::__new()->{ self::MSG }( $code ? self::MSG_OK : $this->failures() ) )
+            ->server->setStatus( $code !== false ? $code : self::CODE_BAD_REQUEST );
     }
 }
