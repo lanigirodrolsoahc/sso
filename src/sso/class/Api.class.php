@@ -216,15 +216,16 @@ class Api extends SsoServer
     /**
      * lists all members of a group
      *
+     * @param   ?array  $query
      * @param   string  $name
      *
      * @url GET /api/listUsers/group/$name
      * @url GET /listUsers/group/$name
      */
     public
-    function listGroupMembers ( string $name ) : void
+    function listGroupMembers ( ?array $query = [], string $name ) : void
     {
-        $this->listUsers([], null, $name);
+        $this->listUsers($query ?: $_GET, null, $name);
     }
 
     /**

@@ -201,7 +201,7 @@ class SsoCalls extends CommonServer
             ->{ self::APP_RIGHT_W }( $piped->{ self::APP_RIGHT_W } )
             ->{ self::APP_USER_ID }( ( $user = $data->user )->id )
             ->{ self::APP_USER }( (array) $this->buildUser($user) )
-            ->{ self::APP_USERS_LIST }( ( $data = $this->listUsers($data->token->content) ? : $data )->list ?? [] )
+            ->{ self::APP_USERS_LIST }( ( $data = $this->listUsers($data->token->content) ?: $data )->list ?? [] )
             ->{ self::APP_TOKEN }( $data->token->content )
             ->{ self::APP_EXPIRES_IN }( self::calcTokenLifetime($data) )
             ->{ self::APP_EXPIRES_AT }($data->token->expires);
@@ -494,28 +494,59 @@ class SsoCalls extends CommonServer
     }
 
     /**
-     * lists SSO users
+     * lists members of sso.groupName
      *
-     * @param   string  $token
-     * @param   ?string $appName
+     * @param   string  $groupName
      *
-     * @return  stdClass|false
+     * @return  array<Std>
      */
     public
-    function listUsers ( string $token, string $appName = null )
+    function listMembers ( string $groupName ) : array
+    {
+        do
+        {
+            if ( empty( $token = self::getSessionParam(self::APP_TOKEN) ) ) break;
+            if ( ! ( $data = $this->listMembersOrUsers($token, null, $groupName)  ) ) break;
+
+            $list = $data->list;
+        }
+        while ( 0 );
+
+        return $list ?? [];
+    }
+
+    /**
+     * lists SSO users
+     *
+     * @param   string      $token
+     * @param   ?string     $appName
+     * @param   ?string     $groupName
+     *
+     * @return  stdClass|false
+     *
+     * @throws  SsoCallsUrlBuilderIncompatibleParameters
+     */
+    private
+    function listMembersOrUsers ( string $token, ?string $appName = '', ?string $groupName = '' )
     {
         $this->__init();
 
+        if ( $groupName && $appName )
+            throw new SsoCallsUrlBuilderIncompatibleParameters;
+
         $this
-            ->curlOption( CURLOPT_URL, sprintf(
+            ->curlOption( CURLOPT_URL, $url = sprintf(
                 '%1$s?%2$s',
                 $this->url(
                     implode(
                         '/',
                         array_filter(
-                            [ __FUNCTION__, $appName ],
-                            fn ( $item ) : bool => $item !== null
-                    ) )
+                            array_merge(
+                                [ 'listUsers', $appName ],
+                                $groupName ? ['group', $groupName] : []
+                            )
+                        )
+                    )
                 ),
                 http_build_query(
                     (array) Std::__new()->{ self::K_TOKEN }($token)
@@ -535,6 +566,20 @@ class SsoCalls extends CommonServer
         }
 
         return $data ?? false;
+    }
+
+    /**
+     * lists SSO users
+     *
+     * @param   string  $token
+     * @param   ?string $appName
+     *
+     * @return  stdClass|false
+     */
+    public
+    function listUsers ( string $token, string $appName = '' )
+    {
+        return $this->listMembersOrUsers( ...func_get_args() );
     }
 
     /**
