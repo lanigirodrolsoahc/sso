@@ -236,8 +236,8 @@ class User
                         ->getUsersForGroup( (int) $groop->{ $group->f_id } )
                     as $candidate
                 )
-                    if ( ! ( $list[ $userId = $candidate->{ ( $user = $user ?? User::Instance() )->f_id } ] ?? false ) )
-                        $list[$userId] = $user->is( (int) $candidate->{ $membership->f_subject } );
+                    if ( ! ( $list[ $userId = (int) $candidate->{ $membership->f_subject } ] ?? false ) )
+                        $list[$userId] = User::Instance()->is( $userId );
 
         return array_values($list);
     }
